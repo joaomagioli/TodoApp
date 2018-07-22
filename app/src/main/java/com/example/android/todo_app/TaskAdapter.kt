@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class TaskAdapter(private val mContext: Context,
-                  private val mTasks: List<TaskModel>) : RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
+                  private val mTasks: MutableList<TaskModel> = mutableListOf()) : RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
 
     private val dateFormat: SimpleDateFormat = SimpleDateFormat(DATE_FORMAT, Locale.getDefault())
 
@@ -48,12 +48,20 @@ class TaskAdapter(private val mContext: Context,
             1 -> priorityColor = ContextCompat.getColor(mContext, R.color.materialRed)
             2 -> priorityColor = ContextCompat.getColor(mContext, R.color.materialOrange)
             3 -> priorityColor = ContextCompat.getColor(mContext, R.color.materialYellow)
-            else -> {
-
-            }
         }
 
         return priorityColor
+    }
+
+    fun replaceAllTasks(tasks : List<TaskModel>) {
+        mTasks.clear()
+        mTasks.addAll(tasks)
+        notifyDataSetChanged()
+    }
+
+    fun add(task : List<TaskModel>) {
+        mTasks.addAll(task)
+        notifyItemRangeInserted(0, mTasks.size)
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

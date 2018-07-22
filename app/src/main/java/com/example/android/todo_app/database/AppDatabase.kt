@@ -16,7 +16,7 @@ import android.content.Context
     abstract fun taskDao() : TaskDao
 
     // Making sure that different activities will use the same instance
-    object DatabaseFactory {
+    companion object {
 
         private const val DATABASE_NAME = "todolist"
 
