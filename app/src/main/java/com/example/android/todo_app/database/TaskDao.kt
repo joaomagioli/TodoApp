@@ -1,7 +1,6 @@
 package com.example.android.todo_app.database
 
 import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
 import android.arch.persistence.room.*
 
 /**
@@ -11,7 +10,7 @@ import android.arch.persistence.room.*
 interface TaskDao {
 
     @Query("SELECT * FROM task ORDER BY priority")
-    fun loadAllTasks() : MutableLiveData<List<TaskModel>>
+    fun loadAllTasks() : LiveData<List<TaskModel>>
 
     @Query("SELECT * FROM task WHERE id = :id")
     fun loadTaskById(id: Long) : LiveData<TaskModel>

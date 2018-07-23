@@ -15,21 +15,23 @@ import android.content.Context
 
     abstract fun taskDao() : TaskDao
 
-    // Making sure that different activities will use the same instance
-    companion object {
+}
 
-        private const val DATABASE_NAME = "todolist"
+// Making sure that different activities will use the same instance
+object Database {
 
-        // Will hold the single instance
-        lateinit var database: AppDatabase
+    private const val DATABASE_NAME = "todolist"
 
-        // Method that will generate DAO instance for us
-        fun getInstance(context: Context) : AppDatabase {
+    // Will hold the single instance
+    @Volatile
+    lateinit var database: AppDatabase
+
+    // Method that will generate DAO instance for us
+    fun getInstance(context: Context): AppDatabase {
+        synchronized(this) {
             if (::database.isInitialized) return database
             database = Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME).build()
             return database
         }
-
     }
-
 }
