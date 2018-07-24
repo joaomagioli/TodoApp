@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import com.example.android.todo_app.adapter.TaskAdapter
 import com.example.android.todo_app.database.Database
 import com.example.android.todo_app.database.TaskDao
 import kotlinx.android.synthetic.main.activity_main.*

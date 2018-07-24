@@ -2,4 +2,15 @@
     <string name="app_name">todo-app</string>
     <string name="action_settings">Settings</string>
     <string name="main_layout_text_view_description">Description</string>
+
+    <string name="edit_text_task_description">Describe your task</string>
+    <string name="text_view_priority_text">Priority</string>
+
+    <!-- PRIORITY RADIO BUTTON -->
+    <string name="radio_button_high_priority_text">High</string>
+    <string name="radio_button_medium_priority_text">Medium</string>
+    <string name="radio_button_low_priority_text">Low</string>
+
+    <string name="button_add_task">Add</string>
+
 </resources>
