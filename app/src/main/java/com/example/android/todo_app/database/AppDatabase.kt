@@ -12,9 +12,9 @@ import com.example.android.todo_app.model.TaskModel
  */
 @Database(entities = [TaskModel::class], version = 1, exportSchema = false)
 @TypeConverters(DateConverter::class)
- abstract class AppDatabase : RoomDatabase() {
+abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun taskDao() : TaskDao
+    abstract fun taskDao(): TaskDao
 
 }
 

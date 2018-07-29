@@ -11,10 +11,10 @@ import com.example.android.todo_app.model.TaskModel
 interface TaskDao {
 
     @Query("SELECT * FROM task ORDER BY priority")
-    fun loadAllTasks() : LiveData<List<TaskModel>>
+    fun loadAllTasks(): LiveData<List<TaskModel>>
 
     @Query("SELECT * FROM task WHERE id = :id")
-    fun loadTaskById(id: Long) : LiveData<TaskModel>
+    fun loadTaskById(id: Long): LiveData<TaskModel>
 
     @Delete
     fun deleteTask(taskModel: TaskModel)

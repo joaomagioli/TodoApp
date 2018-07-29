@@ -1,7 +1,9 @@
 package com.example.android.todo_app.ui.addtask
 
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.widget.EditText
 import com.example.android.todo_app.R
 import com.example.android.todo_app.database.Database
 import com.example.android.todo_app.model.TaskModel
@@ -11,9 +13,10 @@ import java.util.*
 class AddTaskActivity : AppCompatActivity() {
 
     companion object {
-        const val HIGH_PRIORITY_VALUE = 1
-        const val MEDIUM_PRIORITY_VALUE = 2
-        const val LOW_PRIORITY_VALUE = 3
+        private const val HIGH_PRIORITY_VALUE = 1
+        private const val MEDIUM_PRIORITY_VALUE = 2
+        private const val LOW_PRIORITY_VALUE = 3
+        private const val EDIT_TEXT_ERROR_MESSAGE = "The task name is required"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +29,7 @@ class AddTaskActivity : AppCompatActivity() {
     }
 
     private fun addTask() {
-        val taskDescription: String = editTextAddTask.text.toString()
+        val taskDescription = editTextAddTask.text.toString()
         val taskPriority = getTaskPriority()
         val date = Date()
 
@@ -35,7 +38,7 @@ class AddTaskActivity : AppCompatActivity() {
 
         taskDao.insertTask(TaskModel(description = taskDescription, priority = taskPriority, updatedAt = date))
 
-        finish()
+        validateTextAndFinishActivity(editTextAddTask)
     }
 
     private fun getTaskPriority(): Int {
@@ -48,5 +51,14 @@ class AddTaskActivity : AppCompatActivity() {
             else -> LOW_PRIORITY_VALUE
         }
         return priority
+    }
+
+    private fun validateTextAndFinishActivity(editText: EditText) {
+
+        if (editText.text.isEmpty()) {
+            editText.setError(EDIT_TEXT_ERROR_MESSAGE, ContextCompat.getDrawable(this, R.drawable.notification_icon_background))
+        } else {
+            finish()
+        }
     }
 }

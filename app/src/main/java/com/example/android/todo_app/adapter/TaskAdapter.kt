@@ -16,6 +16,13 @@ import java.util.*
 class TaskAdapter(private val mContext: Context,
                   private val mTasks: MutableList<TaskModel> = mutableListOf()) : RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
 
+    companion object {
+        private const val DATE_FORMAT = "dd/MM/yyy"
+        private const val HIGH_PRIORITY_VALUE = 1
+        private const val MEDIUM_PRIORITY_VALUE = 2
+        private const val LOW_PRIORITY_VALUE = 3
+    }
+
     private val dateFormat: SimpleDateFormat = SimpleDateFormat(DATE_FORMAT, Locale.getDefault())
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
@@ -42,33 +49,29 @@ class TaskAdapter(private val mContext: Context,
 
     }
 
-    private fun getPriorityColor(priority: Int): Int {
-        var priorityColor = 0
-
-        when (priority) {
-            3 -> priorityColor = ContextCompat.getColor(mContext, R.color.materialYellow)
-            2 -> priorityColor = ContextCompat.getColor(mContext, R.color.materialOrange)
-            1 -> priorityColor = ContextCompat.getColor(mContext, R.color.materialRed)
-        }
-
-        return priorityColor
-    }
-
-    fun add(task : List<TaskModel>) {
+    fun add(task: List<TaskModel>) {
         mTasks.clear()
         mTasks.addAll(task)
         notifyDataSetChanged()
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    private fun getPriorityColor(priority: Int): Int {
+        var priorityColor = 0
 
-        val taskDescription : TextView = itemView.text_view_task_description
-        val taskDate : TextView = itemView.text_view_task_date
-        val taskPriority : TextView = itemView.text_view_task_priority
+        when (priority) {
+            LOW_PRIORITY_VALUE -> priorityColor = ContextCompat.getColor(mContext, R.color.materialYellow)
+            MEDIUM_PRIORITY_VALUE -> priorityColor = ContextCompat.getColor(mContext, R.color.materialOrange)
+            HIGH_PRIORITY_VALUE -> priorityColor = ContextCompat.getColor(mContext, R.color.materialRed)
+        }
 
+        return priorityColor
     }
 
-    companion object {
-        private const val DATE_FORMAT = "dd/MM/yyy"
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        val taskDescription: TextView = itemView.text_view_task_description
+        val taskDate: TextView = itemView.text_view_task_date
+        val taskPriority: TextView = itemView.text_view_task_priority
+
     }
 }

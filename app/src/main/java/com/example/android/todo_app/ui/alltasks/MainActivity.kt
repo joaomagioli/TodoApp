@@ -27,8 +27,8 @@ class MainActivity : AppCompatActivity() {
 
         val taskLiveData = taskDao.loadAllTasks()
 
-        taskLiveData.observe(this, Observer {
-            tasks -> tasks?.let { taskAdapter.add(it)}
+        taskLiveData.observe(this, Observer { tasks ->
+            tasks?.let { taskAdapter.add(it) }
         })
 
         addProduct()
@@ -37,8 +37,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addProduct() {
-        fab.setOnClickListener { view ->
-           val addTaskIntent = Intent(this, AddTaskActivity::class.java)
+        fab.setOnClickListener { _ ->
+            val addTaskIntent = Intent(this, AddTaskActivity::class.java)
             startActivity(addTaskIntent)
         }
     }
