@@ -44,13 +44,12 @@ class AddTaskActivity : AppCompatActivity() {
     private fun getTaskPriority(): Int {
         val checkedId = radioGroupPriority.checkedRadioButtonId
 
-        val priority = when (checkedId) {
+        return when (checkedId) {
             R.id.radioButtonLowPriority -> LOW_PRIORITY_VALUE
             R.id.radioButtonMediumPriority -> MEDIUM_PRIORITY_VALUE
             R.id.radioButtonHighPriority -> HIGH_PRIORITY_VALUE
             else -> LOW_PRIORITY_VALUE
         }
-        return priority
     }
 
     private fun validateTextAndFinishActivity(editText: EditText) {

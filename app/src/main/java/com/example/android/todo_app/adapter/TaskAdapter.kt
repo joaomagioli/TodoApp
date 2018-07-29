@@ -55,6 +55,9 @@ class TaskAdapter(private val mContext: Context,
         notifyDataSetChanged()
     }
 
+    val tasks : List<TaskModel>
+    get() { return mTasks }
+
     private fun getPriorityColor(priority: Int): Int {
         var priorityColor = 0
 

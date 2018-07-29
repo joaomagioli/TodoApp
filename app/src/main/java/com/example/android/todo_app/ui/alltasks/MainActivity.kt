@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.helper.ItemTouchHelper
 import com.example.android.todo_app.R
 import com.example.android.todo_app.adapter.TaskAdapter
 import com.example.android.todo_app.database.Database
@@ -34,6 +36,8 @@ class MainActivity : AppCompatActivity() {
         addProduct()
         configRecyclerView()
 
+        onSwipeItem()
+
     }
 
     private fun addProduct() {
@@ -47,6 +51,25 @@ class MainActivity : AppCompatActivity() {
         taskAdapter = TaskAdapter(this)
         recycler_view_task_list.adapter = taskAdapter
         recycler_view_task_list.layoutManager = LinearLayoutManager(this)
+    }
+
+    private fun onSwipeItem() {
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            override fun onMove(recyclerView: RecyclerView?,
+                                viewHolder: RecyclerView.ViewHolder?,
+                                target: RecyclerView.ViewHolder?): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+                val tasks = taskAdapter.tasks
+                val database = Database.getInstance(context = this@MainActivity)
+                taskDao = database.taskDao()
+                taskDao.deleteTask(tasks[position])
+            }
+
+        }).attachToRecyclerView(recycler_view_task_list)
     }
 
 }
