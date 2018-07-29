@@ -1,13 +1,15 @@
-package com.example.android.todo_app
+package com.example.android.todo_app.ui.alltasks
 
 import android.arch.lifecycle.Observer
+import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import com.example.android.todo_app.R
 import com.example.android.todo_app.adapter.TaskAdapter
 import com.example.android.todo_app.database.Database
 import com.example.android.todo_app.database.TaskDao
+import com.example.android.todo_app.ui.addtask.AddTaskActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
@@ -22,9 +24,11 @@ class MainActivity : AppCompatActivity() {
 
         val database = Database.getInstance(this)
         taskDao = database.taskDao()
-        val tasksLiveData = taskDao.loadAllTasks()
-        tasksLiveData.observe(this, Observer {
-            tasks -> tasks?.let { taskAdapter.replaceAllTasks(it)}
+
+        val taskLiveData = taskDao.loadAllTasks()
+
+        taskLiveData.observe(this, Observer {
+            tasks -> tasks?.let { taskAdapter.add(it)}
         })
 
         addProduct()
@@ -34,8 +38,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun addProduct() {
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+           val addTaskIntent = Intent(this, AddTaskActivity::class.java)
+            startActivity(addTaskIntent)
         }
     }
 

@@ -2,6 +2,7 @@ package com.example.android.todo_app.database
 
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.*
+import com.example.android.todo_app.model.TaskModel
 
 /**
  * Interface responsable for interacting with the entity

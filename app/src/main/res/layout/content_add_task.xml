@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/editTextAddTask"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
@@ -15,13 +15,13 @@
         android:layout_marginTop="20dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/edit_text_task_description"
+        android:hint="@string/edit_text_task_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewTaskPriority"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -29,7 +29,7 @@
         android:text="@string/text_view_priority_text"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"/>
+        app:layout_constraintTop_toBottomOf="@+id/editTextAddTask"/>
 
     <RadioGroup
         android:id="@+id/radioGroupPriority"
@@ -41,7 +41,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toBottomOf="@+id/textViewTaskPriority">
 
         <RadioButton
             android:id="@+id/radioButtonHighPriority"
@@ -74,6 +74,7 @@
             android:layout_weight="1"
             android:background="@color/materialYellow"
             android:buttonTint="@android:color/white"
+            android:checked="true"
             android:text="@string/radio_button_low_priority_text"
             android:textColor="@android:color/white"
             tools:layout_editor_absoluteX="258dp"

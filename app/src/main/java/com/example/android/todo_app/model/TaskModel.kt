@@ -1,4 +1,4 @@
-package com.example.android.todo_app.database
+package com.example.android.todo_app.model
 
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
@@ -8,6 +8,7 @@ import java.util.*
 /**
  * Model of the task
  */
+
 @Entity(tableName = "task")
 class TaskModel(
         @PrimaryKey(autoGenerate = true)
