@@ -25,6 +25,9 @@ class TaskAdapter(private val mContext: Context,
 
     private val dateFormat: SimpleDateFormat = SimpleDateFormat(DATE_FORMAT, Locale.getDefault())
 
+    val tasks : List<TaskModel>
+        get() { return mTasks }
+
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(mContext).inflate(R.layout.task_list, parent, false)
         return ViewHolder(view)
@@ -54,9 +57,6 @@ class TaskAdapter(private val mContext: Context,
         mTasks.addAll(task)
         notifyDataSetChanged()
     }
-
-    val tasks : List<TaskModel>
-    get() { return mTasks }
 
     private fun getPriorityColor(priority: Int): Int {
         var priorityColor = 0

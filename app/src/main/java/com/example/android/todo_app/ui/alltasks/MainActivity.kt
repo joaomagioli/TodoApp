@@ -1,6 +1,7 @@
 package com.example.android.todo_app.ui.alltasks
 
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -19,25 +20,28 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var taskDao: TaskDao
     private lateinit var taskAdapter: TaskAdapter
+    private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val database = Database.getInstance(this)
-        taskDao = database.taskDao()
-
-        val taskLiveData = taskDao.loadAllTasks()
-
-        taskLiveData.observe(this, Observer { tasks ->
-            tasks?.let { taskAdapter.add(it) }
-        })
+        setupViewModel()
 
         addProduct()
         configRecyclerView()
 
         onSwipeItem()
 
+    }
+
+    private fun setupViewModel() {
+        val factory = MainViewModelFactory(application)
+        viewModel = ViewModelProviders.of(this, factory).get(MainViewModel::class.java)
+
+        viewModel.getTasks().observe(this, Observer { tasks ->
+            tasks?.let { taskAdapter.add(it) }
+        })
     }
 
     private fun addProduct() {
