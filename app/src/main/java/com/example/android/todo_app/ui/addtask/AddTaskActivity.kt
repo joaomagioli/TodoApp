@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.EditText
 import com.example.android.todo_app.R
 import com.example.android.todo_app.model.TaskModel
+import kotlinx.android.synthetic.main.activity_add_task.*
 import kotlinx.android.synthetic.main.content_add_task.*
 import java.util.*
 
@@ -25,9 +26,16 @@ class AddTaskActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_task)
 
+        configToolbar()
+
         buttonAddTask.setOnClickListener {
             addTask()
         }
+    }
+
+    private fun configToolbar() {
+        toolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_material)
+        toolbar.setOnClickListener { finish() }
     }
 
     private fun addTask() {
