@@ -1,16 +1,18 @@
 package com.example.android.todo_app.ui.addtask
 
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.widget.EditText
 import com.example.android.todo_app.R
-import com.example.android.todo_app.database.Database
 import com.example.android.todo_app.model.TaskModel
 import kotlinx.android.synthetic.main.content_add_task.*
 import java.util.*
 
 class AddTaskActivity : AppCompatActivity() {
+
+    private lateinit var viewModel: AddTaskViewModel
 
     companion object {
         private const val HIGH_PRIORITY_VALUE = 1
@@ -33,12 +35,15 @@ class AddTaskActivity : AppCompatActivity() {
         val taskPriority = getTaskPriority()
         val date = Date()
 
-        val database = Database.getInstance(this)
-        val taskDao = database.taskDao()
-
-        taskDao.insertTask(TaskModel(description = taskDescription, priority = taskPriority, updatedAt = date))
+        setupViewModel(taskDescription, taskPriority, date)
 
         validateTextAndFinishActivity(editTextAddTask)
+    }
+
+    private fun setupViewModel(taskDescription: String, taskPriority: Int, date: Date) {
+        val factory = AddTaskViewModelFactory(application)
+        viewModel = ViewModelProviders.of(this, factory).get(AddTaskViewModel::class.java)
+        viewModel.insertTask(TaskModel(description = taskDescription, priority = taskPriority, updatedAt = date))
     }
 
     private fun getTaskPriority(): Int {

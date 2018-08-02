@@ -32,7 +32,6 @@ object Database {
         synchronized(this) {
             if (::database.isInitialized) return database
             database = Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
-                    .allowMainThreadQueries()
                     .build()
             return database
         }
