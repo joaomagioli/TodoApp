@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.alltasks.MainActivity"
+            android:name=".view.main.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -19,7 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.example.android.todo_app.ui.addtask.AddTaskActivity"
+        <activity android:name="com.example.android.todo_app.view.addtask.AddTaskActivity"
                   android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>

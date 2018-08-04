@@ -1,11 +1,11 @@
-package com.example.android.todo_app.database
+package com.example.android.todo_app.repository.local.database
 
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.arch.persistence.room.TypeConverters
 import android.content.Context
-import com.example.android.todo_app.model.TaskModel
+import com.example.android.todo_app.repository.model.TaskModel
 
 /**
  * Class that will represent the app database
@@ -31,8 +31,7 @@ object Database {
     fun getInstance(context: Context): AppDatabase {
         synchronized(this) {
             if (::database.isInitialized) return database
-            database = Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
-                    .build()
+            database = Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME).build()
             return database
         }
     }

@@ -1,8 +1,8 @@
-package com.example.android.todo_app.database
+package com.example.android.todo_app.repository.local.database
 
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.*
-import com.example.android.todo_app.model.TaskModel
+import com.example.android.todo_app.repository.model.TaskModel
 
 /**
  * Interface responsable for interacting with the entity

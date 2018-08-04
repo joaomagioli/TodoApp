@@ -1,4 +1,4 @@
-package com.example.android.todo_app.adapter
+package com.example.android.todo_app.view.adapter
 
 import android.content.Context
 import android.support.v4.content.ContextCompat
@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.android.todo_app.R
-import com.example.android.todo_app.model.TaskModel
+import com.example.android.todo_app.repository.model.TaskModel
 import kotlinx.android.synthetic.main.task_list.view.*
 import java.text.SimpleDateFormat
 import java.util.*

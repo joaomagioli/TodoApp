@@ -1,4 +1,4 @@
-package com.example.android.todo_app.database
+package com.example.android.todo_app.repository.local.database
 
 import android.arch.persistence.room.TypeConverter
 import java.util.*

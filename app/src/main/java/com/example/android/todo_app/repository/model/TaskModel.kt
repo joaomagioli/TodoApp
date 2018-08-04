@@ -1,4 +1,4 @@
-package com.example.android.todo_app.model
+package com.example.android.todo_app.repository.model
 
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
