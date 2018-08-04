@@ -10,15 +10,12 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import com.example.android.todo_app.R
 import com.example.android.todo_app.adapter.TaskAdapter
-import com.example.android.todo_app.database.Database
-import com.example.android.todo_app.database.TaskDao
 import com.example.android.todo_app.ui.addtask.AddTaskActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var taskDao: TaskDao
     private lateinit var taskAdapter: TaskAdapter
     private lateinit var viewModel: MainViewModel
 
@@ -68,9 +65,7 @@ class MainActivity : AppCompatActivity() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
                 val tasks = taskAdapter.tasks
-                val database = Database.getInstance(context = this@MainActivity)
-                taskDao = database.taskDao()
-                taskDao.deleteTask(tasks[position])
+                viewModel.deleteTask(tasks[position])
             }
 
         }).attachToRecyclerView(recycler_view_task_list)
