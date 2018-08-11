@@ -8,25 +8,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.android.todo_app.R
+import com.example.android.todo_app.extensions.brazilianDateFormat
 import com.example.android.todo_app.repository.model.TaskModel
 import kotlinx.android.synthetic.main.task_list.view.*
-import java.text.SimpleDateFormat
-import java.util.*
 
 class TaskAdapter(private val mContext: Context,
                   private val mTasks: MutableList<TaskModel> = mutableListOf()) : RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
 
     companion object {
-        private const val DATE_FORMAT = "dd/MM/yyy"
         private const val HIGH_PRIORITY_VALUE = 1
         private const val MEDIUM_PRIORITY_VALUE = 2
         private const val LOW_PRIORITY_VALUE = 3
     }
 
-    private val dateFormat: SimpleDateFormat = SimpleDateFormat(DATE_FORMAT, Locale.getDefault())
-
-    val tasks : List<TaskModel>
-        get() { return mTasks }
+    val tasks: List<TaskModel>
+        get() {
+            return mTasks
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(mContext).inflate(R.layout.task_list, parent, false)
@@ -41,7 +39,7 @@ class TaskAdapter(private val mContext: Context,
 
         holder?.let {
             it.taskDescription.text = task.description
-            it.taskDate.text = dateFormat.format(task.updatedAt)
+            it.taskDate.text = task.updatedAt.brazilianDateFormat()
             it.taskPriority.text = task.priority.toString()
 
             // Setting the background color

@@ -19,7 +19,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         taskDao = database.taskDao()
     }
 
-    fun getTasks() : LiveData<List<TaskModel>> {
+    fun getTasks(): LiveData<List<TaskModel>> {
         return taskDao.loadAllTasks()
     }
 

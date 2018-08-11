@@ -11,7 +11,7 @@ import kotlinx.coroutines.experimental.launch
 
 class AddTaskViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val taskDao : TaskDao
+    private val taskDao: TaskDao
 
     init {
         val database = Database.getInstance(application)
