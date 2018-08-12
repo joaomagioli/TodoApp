@@ -21,10 +21,7 @@ class TaskAdapter(private val mContext: Context,
         private const val LOW_PRIORITY_VALUE = 3
     }
 
-    val tasks: List<TaskModel>
-        get() {
-            return mTasks
-        }
+    val tasks get() = mTasks
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(mContext).inflate(R.layout.task_list, parent, false)
