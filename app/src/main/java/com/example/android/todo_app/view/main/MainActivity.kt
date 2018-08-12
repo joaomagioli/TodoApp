@@ -25,16 +25,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setupViewModel()
+        getTasksFromViewModel()
 
-        addProduct()
+        callAddProductActivity()
+
         configRecyclerView()
 
         onSwipeItem()
 
     }
 
-    private fun setupViewModel() {
+    private fun getTasksFromViewModel() {
         val factory = MainViewModelFactory(application)
         viewModel = ViewModelProviders.of(this, factory).get(MainViewModel::class.java)
 
@@ -43,17 +44,18 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun addProduct() {
+    private fun callAddProductActivity() {
         fab.setOnClickListener { _ ->
-            val addTaskIntent = Intent(this, AddTaskActivity::class.java)
-            startActivity(addTaskIntent)
+            startActivity(Intent(this, AddTaskActivity::class.java))
         }
     }
 
     private fun configRecyclerView() {
         taskAdapter = TaskAdapter(this)
-        recycler_view_task_list.adapter = taskAdapter
-        recycler_view_task_list.layoutManager = LinearLayoutManager(this)
+        with(recycler_view_task_list) {
+            adapter = taskAdapter
+            layoutManager = LinearLayoutManager(this@MainActivity)
+        }
     }
 
     private fun onSwipeItem() {
