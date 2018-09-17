@@ -31,8 +31,6 @@ class MainActivity : AppCompatActivity() {
 
         configRecyclerView()
 
-        onSwipeItem()
-
     }
 
     private fun getTasksFromViewModel() {
@@ -52,26 +50,23 @@ class MainActivity : AppCompatActivity() {
 
     private fun configRecyclerView() {
         taskAdapter = TaskAdapter(this)
-        with(recycler_view_task_list) {
-            adapter = taskAdapter
-            layoutManager = LinearLayoutManager(this@MainActivity)
-        }
-    }
 
-    private fun onSwipeItem() {
-        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
-            override fun onMove(recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder?,
-                                target: RecyclerView.ViewHolder?): Boolean {
-                return false
-            }
-
+        val swipeHandler = object : SwipeToDeleteCallback(this) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
                 val tasks = taskAdapter.tasks
                 viewModel.deleteTask(tasks[position])
             }
+        }
 
-        }).attachToRecyclerView(recycler_view_task_list)
+        with(recycler_view_task_list) {
+            adapter = taskAdapter
+            layoutManager = LinearLayoutManager(this@MainActivity)
+        }
+
+        val itemTouchHelper = ItemTouchHelper(swipeHandler)
+        itemTouchHelper.attachToRecyclerView(recycler_view_task_list)
+
     }
 
 }
