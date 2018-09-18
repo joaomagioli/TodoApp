@@ -8,7 +8,6 @@ import android.widget.EditText
 import com.example.android.todo_app.R
 import com.example.android.todo_app.repository.model.TaskModel
 import com.example.android.todo_app.viewmodel.AddTaskViewModel
-import com.example.android.todo_app.viewmodel.AddTaskViewModelFactory
 import kotlinx.android.synthetic.main.activity_add_task.*
 import kotlinx.android.synthetic.main.content_add_task.*
 import java.util.*
@@ -51,8 +50,7 @@ class AddTaskActivity : AppCompatActivity() {
     }
 
     private fun setupViewModel(taskDescription: String, taskPriority: Int, date: Date) {
-        val factory = AddTaskViewModelFactory(application)
-        viewModel = ViewModelProviders.of(this, factory).get(AddTaskViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(AddTaskViewModel::class.java)
         viewModel.insertTask(TaskModel(description = taskDescription, priority = taskPriority, updatedAt = date))
     }
 

@@ -12,7 +12,6 @@ import com.example.android.todo_app.R
 import com.example.android.todo_app.view.adapter.TaskAdapter
 import com.example.android.todo_app.view.addtask.AddTaskActivity
 import com.example.android.todo_app.viewmodel.MainViewModel
-import com.example.android.todo_app.viewmodel.MainViewModelFactory
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
@@ -34,9 +33,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getTasksFromViewModel() {
-        val factory = MainViewModelFactory(application)
-        viewModel = ViewModelProviders.of(this, factory).get(MainViewModel::class.java)
-
+        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         viewModel.getTasks().observe(this, Observer { tasks ->
             tasks?.let { taskAdapter.add(it) }
         })
