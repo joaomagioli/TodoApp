@@ -59,10 +59,12 @@ class MainActivity : AppCompatActivity() {
         with(recycler_view_task_list) {
             adapter = taskAdapter
             layoutManager = LinearLayoutManager(this@MainActivity)
+            addItemDecoration(SimpleDividerItemDecoration(this@MainActivity))
         }
 
-        val itemTouchHelper = ItemTouchHelper(swipeHandler)
-        itemTouchHelper.attachToRecyclerView(recycler_view_task_list)
+        ItemTouchHelper(swipeHandler).apply {
+            attachToRecyclerView(recycler_view_task_list)
+        }
 
     }
 
